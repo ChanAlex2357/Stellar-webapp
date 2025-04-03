@@ -1,6 +1,7 @@
 <script setup>
 import Accueil from './screens/Accueil.vue'
 import Caracteristique from './screens/Caracteristique.vue'
+import Gallerie from './screens/Galerie.vue'
 
 </script>
 
@@ -8,6 +9,7 @@ import Caracteristique from './screens/Caracteristique.vue'
   <main>
       <Accueil></Accueil>  
       <Caracteristique></Caracteristique>
+      <Gallerie></Gallerie>
       
   </main>
 </template>
