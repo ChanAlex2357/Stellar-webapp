@@ -1,3 +1,11 @@
+:root {
+  --primary-color :#2a92f4;
+  --secondary-color:#f1891a;
+  --dark-color:#141212;
+  --light-color:#3a342a;
+  --white-color:#ffffff;
+}
+
 #app {
   max-width: 1280px;
   margin: 0 auto;

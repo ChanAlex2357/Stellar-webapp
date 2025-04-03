@@ -6,7 +6,7 @@ import Accueil from './screens/Accueil.vue'
 <template>
   <main>
       <Accueil></Accueil>
-      <div>
+      <div id="orange-bar">
         orange color
       </div>
   </main>
@@ -16,7 +16,13 @@ import Accueil from './screens/Accueil.vue'
 header {
   line-height: 1.5;
 }
-  /* 
+
+#orange-bar {
+  background-color: var(--secondary-color);
+  height: 50px;
+}
+
+/* 
 
 .logo {
   display: block;
