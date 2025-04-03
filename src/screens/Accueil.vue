@@ -4,15 +4,20 @@ import TryButton from  '../components/TryButton.vue'
 
 <template>
     <div class="container" id="accueil">
-        <div>
-            <h1>Stellar</h1>
-            <h2>Technologie adrenaline</h2>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis illum sit vero laboriosam facere! Saepe ipsam sed nam eveniet impedit! Odio minus nihil labore harum voluptas, voluptatibus id architecto excepturi?</p>
+        <div id="accueil-text-container">
+            <div id="accueil-logo" class="">
+                <h1>STELLAR</h1>
+                <h1>Z</h1>
+            </div>
+            <div id="accueil-text" class="grow gap">
+                <h2>Technologie adrenaline</h2>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis illum sit vero laboriosam facere! Saepe ipsam sed nam eveniet impedit! Odio minus nihil labore harum voluptas, voluptatibus id architecto excepturi?</p>
+            </div>
         </div>
         <div id="try-button-container">
-            <p>
+            <div id="button-container">
                 <TryButton></TryButton>
-            </p>
+            </div>
         </div>
     </div>
 </template>
@@ -22,16 +27,52 @@ import TryButton from  '../components/TryButton.vue'
         /* width: 100vw; */
         height: 100vh;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 2fr;
         background-size: cover;
         background-repeat: no-repeat;
         color: var(--white-color);
         background-image: radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1) ), url("E:\\ITU\\S6\\Stellar-webapp\\src\\assets\\image\\accueil.jpg");
     }
+    .grow {
+        flex-grow: 1;
+    }
+
+    .gap {
+        gap: 20px;
+    }
+
+    #accueil-logo {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 500px;
+    }
+
+    #accueil-text-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    #accueil-text{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
 
     #try-button-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            ". , ."
+            ". , a"
+        ;
+    }
+
+
+    #button-container {
+        grid-area: a;
         display: flex;
-        justify-content: end;
-        align-items: end;
+        justify-content: center;
+        align-items: center;
     }
 </style>
