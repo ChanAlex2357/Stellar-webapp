@@ -3,7 +3,7 @@ import TryButton from  '../components/TryButton.vue'
 </script>
 
 <template>
-    <div>
+    <div class="container" id="accueil">
         <div>
             <h1>Stellar</h1>
             <h2>Technologie adrenaline</h2>

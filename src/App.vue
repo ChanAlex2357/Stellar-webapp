@@ -6,14 +6,14 @@ import Accueil from './screens/Accueil.vue'
 <template>
   <main>
       <Accueil></Accueil>    
-      
   </main>
 </template>
 
 <style scoped>
-/* header {
+header {
   line-height: 1.5;
 }
+  /* 
 
 .logo {
   display: block;
@@ -31,10 +31,5 @@ import Accueil from './screens/Accueil.vue'
     margin: 0 2rem 0 0;
   }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-} */
+  */
 </style>
