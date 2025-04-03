@@ -11,7 +11,6 @@ import NosProduit from './screens/NosProduit.vue'
   <main>
       <Accueil></Accueil>
       <div id="orange-bar"></div>
-      <Accueil></Accueil>  
       <Caracteristique></Caracteristique>
       <Gallerie></Gallerie>
       <Contact></Contact>
