@@ -3,9 +3,9 @@
 </script>
 
 <template>
-        <butvton class="btn-cta">
+        <button class="btn-cta">
             JE VEUX ESSAYER
-        </butvton>
+        </button>
 </template>
 
 <style>
