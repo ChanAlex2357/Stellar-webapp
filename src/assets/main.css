@@ -12,6 +12,20 @@
   box-sizing: border-box;
 }
 
+body {
+  position: relative;
+}
+
+#header {
+  position:fixed;
+  background-color: var(--dark-color);
+  width: 100%;
+  z-index: 1;
+  height: 75px;
+  
+}
+
+
 #app {
   font-weight: normal;
 }
