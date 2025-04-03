@@ -1,11 +1,13 @@
 <script setup>
 import Accueil from './screens/Accueil.vue'
+import Caracteristique from './screens/Caracteristique.vue'
 
 </script>
 
 <template>
   <main>
-      <Accueil></Accueil>    
+      <Accueil></Accueil>  
+      <Caracteristique></Caracteristique>
       
   </main>
 </template>
