@@ -6,9 +6,7 @@ import Accueil from './screens/Accueil.vue'
 <template>
   <main>
       <Accueil></Accueil>
-      <div id="orange-bar">
-        orange color
-      </div>
+      <div id="orange-bar"></div>
   </main>
 </template>
 
