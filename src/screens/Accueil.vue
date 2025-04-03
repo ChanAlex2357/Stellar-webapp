@@ -5,9 +5,10 @@ import TryButton from  '../components/TryButton.vue'
 <template>
     <div>
         <div>
-            <h1>Stellar</h1>
-            <h2>Technologie adrenaline</h2>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis illum sit vero laboriosam facere! Saepe ipsam sed nam eveniet impedit! Odio minus nihil labore harum voluptas, voluptatibus id architecto excepturi?</p>
+            <h1>STELLAR</h1>
+            <h2>Z</h2>
+            <h3>Technologie Adrenaline</h3>
+            <p>Révolutionnaire aux performances extraterrestres,conçu pour repousser les limites.Des performances qui défient les lois du VTT. Une machine à sensations conçue pour les riders sans limites.</p>
         </div>
         <div>
             <TryButton></TryButton>
