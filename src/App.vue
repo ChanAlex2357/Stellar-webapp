@@ -5,7 +5,10 @@ import Accueil from './screens/Accueil.vue'
 
 <template>
   <main>
-      <Accueil></Accueil>    
+      <Accueil></Accueil>
+      <div>
+        orange color
+      </div>
   </main>
 </template>
 

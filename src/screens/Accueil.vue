@@ -12,9 +12,6 @@ import TryButton from  '../components/TryButton.vue'
         <div>
             <TryButton></TryButton>
         </div>
-        <div>
-            orange color
-        </div>
     </div>
 </template>
 <!-- Test changement -->
