@@ -10,6 +10,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Verdana, sans-serif;
 }
 
 body {
@@ -18,13 +19,18 @@ body {
 
 #header {
   position:fixed;
-  background-color: var(--dark-color);
+  background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   z-index: 1;
   height: 75px;
   
 }
 
+#logo {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+}
 
 #app {
   font-weight: normal;
@@ -45,4 +51,36 @@ body {
 
 header .container {
   justify-content: space-between;
+  height: 100%
+}
+
+#menu {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+p {
+  font-size: 20px;
+}
+#menu a {
+  text-decoration: none;
+  color: var(--white-color);
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+#menu a:hover {
+  color: var(--secondary-color);
+
+  transition: all 0.3s ease;
+}
+
+
+
+
+.text-title {
+  text-transform: capitalize;
+  font-size: 50px;
 }

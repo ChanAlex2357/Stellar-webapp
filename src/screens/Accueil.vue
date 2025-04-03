@@ -6,12 +6,13 @@ import TryButton from  '../components/TryButton.vue'
     <div class="container" id="accueil">
         <div id="accueil-text-container">
             <div id="accueil-logo" class="">
-                <h1>STELLAR</h1>
-                <h1>Z</h1>
+                <h1 class="text-title">STELLAR</h1>
+                <h1 class="text-title">Z</h1>
             </div>
             <div id="accueil-text" class="grow gap">
-                <h2>Technologie adrenaline</h2>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis illum sit vero laboriosam facere! Saepe ipsam sed nam eveniet impedit! Odio minus nihil labore harum voluptas, voluptatibus id architecto excepturi?</p>
+                <h1 class="text-title">Technologie </h1>
+                <h1 style="color: var(--secondary-color);line-height: 0rem;" class="text-title">adrenaline</h1>
+                <p style="margin-top: 3rem;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis illum sit vero laboriosam facere! Saepe ipsam sed nam eveniet impedit! Odio minus nihil labore harum voluptas, voluptatibus id architecto excepturi?</p>
             </div>
         </div>
         <div id="try-button-container">
