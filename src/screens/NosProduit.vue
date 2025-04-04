@@ -9,7 +9,7 @@
         <!-- Partie texte -->
     <div class="product-info">
       <h1 class="product-title">STELLAR-A</h1>
-      <h3 class="product-subtitle">Nouvelle Référence</h3>
+      <h3 class="product-subtitle text-title">Nouvelle  <span class="text-title"> Référence</span></h3>
       
       <div class="product-description">
         <p class="main-text">Innovation Radicale, Performance Inégalée</p>
@@ -53,7 +53,7 @@
 .product-images {
   flex: 1;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
 }
 
@@ -66,10 +66,13 @@
 }
 
 .product-subtitle {
-  font-size: 1.5rem;
   font-weight: 600;
   color:var(--white-color);
   margin-bottom: 2rem;
+}
+
+span {
+  color: var(--secondary-color);
 }
 
 .highlight-text {

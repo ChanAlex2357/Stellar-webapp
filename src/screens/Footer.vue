@@ -72,7 +72,6 @@
 .status {
   font-size: 0.85rem;
   letter-spacing: 0.5px;
-  text-transform: uppercase;
 }
 
 @media (max-width: 480px) {

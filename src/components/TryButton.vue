@@ -25,4 +25,4 @@
         background-color: rgba(42, 146, 244, 0.5);
         cursor: pointer;
     }
-</style>
+</style>``
