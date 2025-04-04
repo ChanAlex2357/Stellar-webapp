@@ -5,6 +5,7 @@ import Gallerie from './screens/Galerie.vue'
 import Contact from './screens/Contact.vue'
 import NosProduit from './screens/NosProduit.vue'
 import Footer from './screens/Footer.vue'
+import Boutique from './Boutique.vue'
 
 </script>
 
@@ -17,6 +18,7 @@ import Footer from './screens/Footer.vue'
       <Contact></Contact>
       <NosProduit></NosProduit>
       <Footer></Footer>
+      <Boutique><Boutique/>
       
   </main>
 </template>
