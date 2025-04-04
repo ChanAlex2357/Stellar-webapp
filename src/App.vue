@@ -4,6 +4,7 @@ import Caracteristique from './screens/Caracteristique.vue'
 import Gallerie from './screens/Galerie.vue'
 import Contact from './screens/Contact.vue'
 import NosProduit from './screens/NosProduit.vue'
+import Footer from './screens/Footer.vue'
 
 </script>
 
@@ -15,6 +16,7 @@ import NosProduit from './screens/NosProduit.vue'
       <Gallerie></Gallerie>
       <Contact></Contact>
       <NosProduit></NosProduit>
+      <Footer></Footer>
       
   </main>
 </template>

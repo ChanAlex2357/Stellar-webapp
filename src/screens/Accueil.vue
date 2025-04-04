@@ -31,7 +31,7 @@ import TryButton from  '../components/TryButton.vue'
         background-size: cover;
         background-repeat: no-repeat;
         color: var(--white-color);
-        background-image: radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1) ), url("E:\\ITU\\S6\\Stellar-webapp\\src\\assets\\image\\accueil.jpg");
+        background-image: radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1) ), url("./src\\assets\\image\\accueil.jpg");
     }
     .grow {
         flex-grow: 1;
