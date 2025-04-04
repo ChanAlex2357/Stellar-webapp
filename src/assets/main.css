@@ -21,7 +21,7 @@ body {
   position:fixed;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
-  z-index: 1;
+  z-index: 5;
   height: 75px;
   
 }
@@ -62,12 +62,12 @@ header .container {
 }
 
 p {
-  font-size: 20px;
+  font-size: 18px;
 }
 #menu a {
   text-decoration: none;
   color: var(--white-color);
-  font-size: 20px;
+  font-size: 18px;
   text-transform: uppercase;
 }
 
@@ -77,15 +77,12 @@ p {
   transition: all 0.3s ease;
 }
 
-
-
-
 .text-title {
   text-transform: capitalize;
-  font-size: 50px;
+  font-size: 30px;
 }
 
 .text-header {
   text-transform: uppercase;
-  font-size: 50px;
+  font-size: 30px;
 }

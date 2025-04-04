@@ -27,7 +27,7 @@
     grid-template-columns: 1fr 1fr;
     margin: 0 auto;
     padding: 6rem 0;
-    min-width: 1200px;
+    min-width: 1000px;
 }
 
 .product-image {
@@ -77,6 +77,7 @@
 @media (max-width: 768px) {
     .product-container {
         grid-template-columns: 1fr;
+        min-width: none;
     }
 }
 </style>
