@@ -25,8 +25,7 @@ import TryButton from  '../components/TryButton.vue'
 
 <style>
     #accueil {
-        /* width: 100vw; */
-        height: 100vh;
+        min-height: 800px;
         display: grid;
         grid-template-columns: 1fr 2fr;
         background-size: cover;
@@ -46,10 +45,11 @@ import TryButton from  '../components/TryButton.vue'
         display: flex;
         flex-direction: row;
         align-items: center;
-        height: 500px;
+        min-height: 300px;
     }
 
     #accueil-text-container {
+        margin: 2rem 0;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
