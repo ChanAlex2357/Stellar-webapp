@@ -34,17 +34,18 @@
 <style scoped>
 .contact-info-card {
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  max-width: 300px;
+  width: 100%;
   padding: 1.5rem;
-  background-color: #f8f8f8;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  line-height: 1.6;
+  color: var(--white-color);
+  background-color: var(--secondary-color);
+  display: flex;
 }
 
 .info-line {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  flex-grow: 1;
   margin-bottom: 0.8rem;
 }
 
@@ -57,11 +58,10 @@
 
 .text {
   font-size: 0.95rem;
-  color: #333;
 }
 
 .email {
-  color: #0066cc;
+  color: var(--white-color);
   text-decoration: none;
 }
 
@@ -71,7 +71,6 @@
 
 .status {
   font-size: 0.85rem;
-  color: #666;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
