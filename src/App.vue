@@ -9,7 +9,8 @@ import NosProduit from './screens/NosProduit.vue'
 
 <template>
   <main>
-      <Accueil></Accueil>  
+      <Accueil></Accueil>
+      <div id="orange-bar"></div>
       <Caracteristique></Caracteristique>
       <Gallerie></Gallerie>
       <Contact></Contact>
@@ -19,9 +20,16 @@ import NosProduit from './screens/NosProduit.vue'
 </template>
 
 <style scoped>
-/* header {
+header {
   line-height: 1.5;
 }
+
+#orange-bar {
+  background-color: var(--secondary-color);
+  height: 50px;
+}
+
+/* 
 
 .logo {
   display: block;
@@ -39,10 +47,5 @@ import NosProduit from './screens/NosProduit.vue'
     margin: 0 2rem 0 0;
   }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-} */
+  */
 </style>
