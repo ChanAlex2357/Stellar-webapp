@@ -12,7 +12,7 @@ import PhotoGallerie from '../components/PhotoGallerie.vue'
             
             <div class="video-container">
                 <video autoplay muted loop playsinline>
-                    <source src="./src/assets/image/video.mp4" type="video/mp4">
+                    <source src="@/assets/image/video.mp4" type="video/mp4">
                     Votre navigateur ne supporte pas les vidéos HTML5.
                 </video>
             </div>

@@ -1,71 +1,31 @@
 <script setup>
 import { ref } from 'vue';
-
-const form = ref({
-  name: '',
-  email: '',
-  message: ''
-});
-
-const submitForm = () => {
-  console.log('Formulaire soumis:', form.value);
-  // Ajoutez ici la logique d'envoi
-};
+import IconDisplay from '@/components/IconDisplay.vue'
+import ContactForm from '@/components/ContactForm.vue'
 </script>
 
 <template>
   <div class="contact-page">
     <!-- Partie Gauche - Texte et icônes -->
     <div class="left-section">
-      <h1>AVEZ-VOUS DES QUESTIONS ?</h1>
-      <p class="subtitle">Si vous en avez contactez-nous via le formulaire ou trouvez-nous à cette adresse</p>
+      <div>
+
+        <h1>AVEZ-VOUS DES QUESTIONS ?</h1>
+        <p class="subtitle">Si vous en avez contactez-nous via le formulaire ou trouvez-nous à cette adresse</p>
+      </div>
       
       <div class="social-block">
         <h2>SUIVEZ-NOUS</h2>
         <div class="social-icons">
           <!-- Remplacez par vos vrais composants d'icônes -->
-          <span class="icon">FB</span>
-          <span class="icon">IG</span>
-          <span class="icon">TW</span>
-          <span class="icon">LI</span>
+          <IconDisplay name="facebook"></IconDisplay>
+          <IconDisplay name="instagram"></IconDisplay>
+          <IconDisplay name="twitter"></IconDisplay>
         </div>
       </div>
     </div>
 
-    <!-- Partie Droite - Formulaire -->
-    <div class="right-section">
-      <h2>CONTACTEZ-NOUS</h2>
-      
-      <form @submit.prevent="submitForm" class="contact-form">
-        <div class="form-group">
-          <label>Nom</label>
-          <input 
-            type="text" 
-            v-model="form.name" 
-            required
-          >
-        </div>
-        
-        <div class="form-group">
-          <label>Adresse mail</label>
-          <input 
-            type="email" 
-            v-model="form.email" 
-            required
-          >
-        </div>
-        
-        <div class="form-group">
-          <label>Message</label>
-          <textarea 
-            v-model="form.message" 
-            required
-          ></textarea>
-        </div>
-        
-        <button type="submit" class="submit-btn">ENVOYER</button>
-      </form>
-    </div>
+    <ContactForm />
   </div>
 </template>
 
@@ -81,7 +41,7 @@ const submitForm = () => {
   background-color: var(--secondary-color);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .left-section h1 {
@@ -125,66 +85,6 @@ const submitForm = () => {
   font-size: 0.9rem;
 }
 
-.right-section {
-  flex: 1;
-  padding: 3rem;
-  display: flex;
-  background-color: var(--dark-color);
-  flex-direction: column;
-  justify-content: center;
-}
-
-.right-section h2 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-  color:var(--white-color);
-}
-
-.contact-form {
-  max-width: 400px;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-  color: #555;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.form-group textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-.submit-btn {
-  background-color: var(--primary-color);
-  color:var(--white-color);
-  padding: 0.8rem 2rem;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  width: 100%;
-}
-
-.submit-btn:hover {
-  background-color: #555;
-}
 
 @media (max-width: 768px) {
   .contact-page {
