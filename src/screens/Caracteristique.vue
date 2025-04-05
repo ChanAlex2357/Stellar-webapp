@@ -1,10 +1,5 @@
 <script setup>
-import router from '@/router';
 
-// Logique du composant si nécessaire
-const goToShop = () => {
-  router.push('/boutique');
-}
 </script>
 
 <template>
@@ -17,12 +12,6 @@ const goToShop = () => {
             <div class="product-content">
                 <h1 class="text-header">L'ESSENCE MÊME DE LA PERFORMANCE EXTREME</h1>
                 <p>Ce VTT haut de gamme repousse les limites avec son cadre en fibre de carbone renforcée de nanotubes (5 kg seulement !), une transmission électronique 12 vitesses et des freins hydrauliques ultra-réactifs. Conçu pour les riders exigeants, il allie légèreté extrême, robustesse innovante et vitesse +15% plus élevée grâce à son aérodynamique optimisée. Prêt à dompter les trails les plus fous ? Stellar Z, c'est la fusion parfaite entre high-tech et performance pure</p>
-                
-                <!-- Bouton BOUTIQUE ajouté ici -->
-                <button @click="goToShop" class="shop-button">
-                    BOUTIQUE
-                    <span class="button-arrow">→</span>
-                </button>
             </div>
         </div>
     </div>
@@ -84,39 +73,7 @@ const goToShop = () => {
     line-height: 1.6;
 }
 
-/* Nouveaux styles pour le bouton */
-.shop-button {
-    align-self: flex-start; /* Alignement à gauche */
-    background-color: var(--primary-color);
-    color: var(--dark-color);
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-    margin-top: 1rem;
-    border-radius: 2px;
-}
 
-.shop-button:hover {
-    background-color: var(--white-color);
-    transform: translateY(-2px);
-}
-
-.button-arrow {
-    font-size: 1.3rem;
-    transition: transform 0.3s ease;
-}
-
-.shop-button:hover .button-arrow {
-    transform: translateX(3px);
-}
 
 @media (max-width: 768px) {
     .product-container {
