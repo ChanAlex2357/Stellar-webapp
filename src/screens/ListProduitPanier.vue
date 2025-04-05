@@ -1,54 +1,45 @@
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, onMounted } from 'vue';
 
-const router = useRouter();
-const products = ref([]);
-const searchQuery = ref('');
-const selectedCategory = ref('');
-const loading = ref(true);
-const cart = ref([]);
+const cart = ref({
+  items: [],
+  count: 0,
+  total: 0
+});
 
-function addToCart(product) {
-  const exists = cart.value.find(p => p.id === product.id);
-  if (!exists) {
-    cart.value.push(product);
+onMounted(() => {
+  const savedCart = localStorage.getItem('cart');
+  if (savedCart) {
+    const parsedCart = JSON.parse(savedCart);
+    cart.value.items = parsedCart.items;
+    
+    // Calculer le total et le nombre d'articles
+    cart.value.count = parsedCart.items.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    cart.value.total = parsedCart.items.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
   }
-}
-
-function goToCart() {
-  router.push({ name: 'Cart', state: { cart: cart.value } });
-}
-
-axios.get('http://localhost/dolibarr/htdocs/api/index.php/products?sortfield=t.ref&sortorder=ASC&limit=100', {
-  headers: {
-    'DOLAPIKEY': '2xLG4tBVA4kw3dLrt76735jyCCh8VMfZ',
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
-})
-.then(response => {
-  products.value = response.data;
-  loading.value = false;
 });
 </script>
 
 <template>
-  <div>
-    <h1>NOS PRODUITS</h1>
-
-    <!-- ... search + filtre comme avant ... -->
-
-    <div v-if="loading">Chargement...</div>
-    <div v-else class="product-list">
-      <div v-for="product in products" :key="product.id" class="product-card">
-        <img :src="product.image" :alt="product.name">
-        <h3>{{ product.label }}</h3>
-        <p>{{ product.price }}</p>
-        <button @click="addToCart(product)">Ajouter au panier</button>
+  <div class="app-container">
+    <h1>Votre Panier ({{ cart.count }})</h1>
+    
+    <div v-if="cart.count === 0">
+      <p>Votre panier est vide.</p>
+      <router-link to="/">Continuer vos achats</router-link>
+    </div>
+    
+    <div v-else>
+      <div v-for="item in cart.items" :key="item.id" class="cart-item">
+        <h3>{{ item.label }}</h3>
+        <p>Prix unitaire: {{ item.price }} €</p>
+        <p>Quantité: {{ item.quantity || 1 }}</p>
+        <p>Total: {{ (item.price * (item.quantity || 1)).toFixed(2) }} €</p>
+      </div>
+      
+      <div class="cart-summary">
+        <h3>Total du panier: {{ cart.total.toFixed(2) }} €</h3>
       </div>
     </div>
-
-    <button @click="goToCart" style="margin-top: 2rem;">Voir le panier</button>
   </div>
 </template>

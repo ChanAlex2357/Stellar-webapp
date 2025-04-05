@@ -1,18 +1,52 @@
 <script setup>
-import { ref } from 'vue';
+import { ref , onMounted} from 'vue';
 import axios from 'axios';
+import { useRouter } from 'vue-router'; // Changement ici : useRouter au lieu de useRoute
 
 const products = ref([]);
 const searchQuery = ref('');
 const selectedCategory = ref('');
 const loading = ref(true);
 
-// Liste des catégories (à adapter selon vos besoins)
+const router = useRouter(); // Correction ici : useRouter() pour la navigation
+
+const cart = ref([]);
+
+onMounted(() => {
+  const savedCart = localStorage.getItem('cart');
+  if (savedCart) {
+    const parsedCart = JSON.parse(savedCart);
+    cart.value = parsedCart.items;
+  }
+});
+
+// Liste des catégories
 const categories = ref([
   { id: 1, name: 'Vélos' },
   { id: 2, name: 'Accessoires' },
   { id: 3, name: 'Pièces détachées' }
 ]);
+
+// Fonction pour ajouter au panier
+function addToCart(product) {
+  console.log('Produit ajouté au panier:', product);
+  const exists = cart.value.find(p => p.id === product.id);
+  if (exists) {
+    exists.quantity = (exists.quantity || 1) + 1;
+  } else {
+    cart.value.push({ ...product, quantity: 1 });
+  }
+}
+
+// Fonction pour aller au panier
+function goToCart() {
+  // Enregistrer dans localStorage et naviguer
+  localStorage.setItem('cart', JSON.stringify({
+    items: cart.value,
+    timestamp: new Date().getTime() // Pour gestion d'expiration si besoin
+  }));
+  router.push({ name: 'panier' });
+}
 
 axios.get('http://localhost/dolibarr/htdocs/api/index.php/products?sortfield=t.ref&sortorder=ASC&limit=100', {
   headers: {
@@ -34,6 +68,7 @@ axios.get('http://localhost/dolibarr/htdocs/api/index.php/products?sortfield=t.r
 <template>
   <div class="app-container">
     <h1>NOS PRODUITS</h1>
+    <button @click="goToCart" style="margin-top: 2rem;">Voir le panier</button>
     
     <div class="filters-container">
       <div class="search-container">
@@ -69,10 +104,7 @@ axios.get('http://localhost/dolibarr/htdocs/api/index.php/products?sortfield=t.r
         <p>{{ product.ref }}</p>
         <p>{{ product.nature }}</p>
         <!-- <p>{{ product.libelle }}</p> -->
-        <button class="search-button">
-          Ajouter au panier
-        </button>
-
+        <button @click="addToCart(product)">Ajouter au panier</button>
       </div>
     </div>
   </div>
