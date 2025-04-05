@@ -1,11 +1,22 @@
-<!-- <script setup>
+<script setup>
 import { ref } from 'vue';
+import axios from 'axios';
 
-const products = ref([
+// API URL : http://localhost/dolibarr/htdocs/api/products/list.php
+var products = ref([
   { id: 1, name: 'Vélo Stellar A', image: '/images/velo1.jpg' },
   { id: 2, name: 'Vélo Stellar B', image: '/images/velo2.jpg' },
   // ... autres produits
 ]);
+
+axios.get('http://localhost/dolibarr/htdocs/api/products/list.php')
+  .then(response => {
+    console.log(response.data);
+    products = response.data;
+  })
+  .catch(error => {
+    console.error('Error fetching products:', error);
+  });
 </script>
 
 <template>
@@ -15,6 +26,7 @@ const products = ref([
       <div v-for="product in products" :key="product.id" class="product-card">
         <img :src="product.image" :alt="product.name">
         <h3>{{ product.name }}</h3>
+        
       </div>
     </div>
   </div>
@@ -44,4 +56,4 @@ const products = ref([
   object-fit: cover;
   border-radius: 4px;
 }
-</style> -->
+</style>

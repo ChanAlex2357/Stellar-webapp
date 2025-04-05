@@ -1,10 +1,10 @@
 <script setup>
+import router from '@/router';
+
 // Logique du composant si nécessaire
 const goToShop = () => {
-  // Navigation vers la page boutique
-  // Par exemple avec vue-router: router.push('/boutique')
-  console.log("Redirection vers la boutique");
-};
+  router.push('/boutique');
+}
 </script>
 
 <template>

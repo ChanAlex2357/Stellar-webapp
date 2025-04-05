@@ -1,26 +1,17 @@
 <script setup>
-import Accueil from './screens/Accueil.vue'
-import Caracteristique from './screens/Caracteristique.vue'
-import Gallerie from './screens/Galerie.vue'
-import Contact from './screens/Contact.vue'
-import NosProduit from './screens/NosProduit.vue'
-import Footer from './screens/Footer.vue'
-import Boutique from './page/Boutique.vue'
 
 </script>
 
 <template>
   <main>
-      <Accueil></Accueil>
+      <!-- <Accueil></Accueil>
       <div id="orange-bar"></div>
       <Caracteristique></Caracteristique>
       <Gallerie></Gallerie>
       <Contact></Contact>
       <NosProduit></NosProduit>
-      <Footer></Footer>
-      <Boutique></Boutique>
-   
-      
+      <Footer></Footer> -->
+    <RouterView />
   </main>
 </template>
 
