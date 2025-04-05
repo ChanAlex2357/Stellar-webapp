@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref } from 'vue';
 
 const products = ref([
@@ -44,4 +44,4 @@ const products = ref([
   object-fit: cover;
   border-radius: 4px;
 }
-</style>
+</style> -->

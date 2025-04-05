@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LandingPage from '@/screens/LandingPage.vue'
 import Boutique from '@/screens/Boutique.vue'
+import ListProduitPanier from '@/screens/ListProduitPanier.vue'
 const routes = [
   {
     path: '/',
@@ -13,10 +14,13 @@ const routes = [
     name: 'boutique',
     component: Boutique
   },
-//   {
-//     path: '/produits',
-//     name: 'produits',
-//     component: ProductListView,
+
+    { 
+    path: '/panier',
+    name: 'panier',
+    component: ListProduitPanier,
+    }
+
 //     meta: {
 //       title: 'Nos Produits - Stellar Bikes'
 //     }
