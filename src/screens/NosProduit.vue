@@ -22,8 +22,12 @@
     
     <!-- Partie images -->
     <div class="product-images">
-        <div class="image-placeholder">Image 1</div>
-        <div class="image-placeholder">Image 2</div>
+        <div class="image-placeholder">
+          <img src="@/assets/image/product-1.png" alt="p1">
+        </div>
+        <div class="image-placeholder">
+          <img src="@/assets/image/product-2.png" alt="p2">
+        </div>
     </div>
 </div>
 </div>
@@ -100,22 +104,26 @@ span {
 }
 
 .image-placeholder {
-  background-color: #f5f5f5;
   border-radius: 8px;
   height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #999;
   font-size: 1.2rem;
   overflow: hidden;
   position: relative;
 }
 
+.image-placeholder img {
+  width: 100%;
+  height: auto;
+  scale: 0.6;
+}
+
 /* Effet hover pour les images */
 .image-placeholder:hover {
-  transform: translateY(-5px);
-  transition: transform 0.3s ease;
+  scale: 1.05;
+  transition: scale 0.3s ease-in-out;
 }
 
 @media (max-width: 768px) {

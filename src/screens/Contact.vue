@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import IconDisplay from '@/components/IconDisplay.vue'
 
 const form = ref({
   name: '',
@@ -24,10 +25,9 @@ const submitForm = () => {
         <h2>SUIVEZ-NOUS</h2>
         <div class="social-icons">
           <!-- Remplacez par vos vrais composants d'icônes -->
-          <span class="icon">FB</span>
-          <span class="icon">IG</span>
-          <span class="icon">TW</span>
-          <span class="icon">LI</span>
+          <IconDisplay name="facebook"></IconDisplay>
+          <IconDisplay name="instagram"></IconDisplay>
+          <IconDisplay name="twitter"></IconDisplay>
         </div>
       </div>
     </div>
@@ -38,8 +38,8 @@ const submitForm = () => {
       
       <form @submit.prevent="submitForm" class="contact-form">
         <div class="form-group">
-          <label>Nom</label>
           <input 
+            placeholder="Nom"
             type="text" 
             v-model="form.name" 
             required
@@ -47,17 +47,17 @@ const submitForm = () => {
         </div>
         
         <div class="form-group">
-          <label>Adresse mail</label>
           <input 
             type="email" 
+            placeholder="Adresse mail"
             v-model="form.email" 
             required
           >
         </div>
         
         <div class="form-group">
-          <label>Message</label>
-          <textarea 
+=          <textarea 
+            placeholder="Message"
             v-model="form.message" 
             required
           ></textarea>
