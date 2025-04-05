@@ -95,7 +95,8 @@ const submitForm = () => {
   font-size: 1.2rem;
   color:var(--white-color);
   margin-bottom: 3rem;
-  max-width: 80%;
+  max-width: 60%;
+
 }
 
 .social-block {
