@@ -1,31 +1,33 @@
 <script setup>
-// Vous pouvez importer vos icônes ici
-// Par exemple avec Font Awesome ou des icônes SVG
+import IconDisplay from '@/components/IconDisplay.vue'
 </script>
 
 <template>
   <div class="contact-info-card">
     <!-- Ligne téléphone -->
     <div class="info-line">
-      <span class="icon">📞</span>
+      <IconDisplay name="phone" />
       <span class="text">038417806 - 033775590</span>
     </div>
     
     <!-- Ligne adresse -->
     <div class="info-line">
-      <span class="icon">📍</span>
+      <IconDisplay name="home" />
+
       <span class="text">Andoharanofotsy</span>
     </div>
     
     <!-- Ligne email -->
     <div class="info-line">
-      <span class="icon">✉️</span>
+      <IconDisplay name="mail" />
+
       <a href="mailto:stellarz@gmail.com" class="text email">stellarz@gmail.com</a>
     </div>
     
     <!-- Ligne statut -->
     <div class="info-line">
-      <span class="icon">🔹</span>
+      <IconDisplay name="facebook" />
+
       <span class="text status">StellarZ</span>
     </div>
   </div>
