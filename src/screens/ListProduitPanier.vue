@@ -112,11 +112,10 @@ const submitOrder = async () => {
     });
     
     if (validation_response.status !== 200) throw new Error('Erreur API');
-    alert('Commande validée et envoyée à Dolibarr avec succès !');
-    
+
     // Optionnel : vider le panier après envoi
-    // cart.value = { items: [], count: 0, total: 0 };
-    // localStorage.removeItem('cart');
+    cart.value = { items: [], count: 0, total: 0 };
+    localStorage.removeItem('cart');
     
   } catch (error) {
     console.error('Erreur lors de l\'envoi à Dolibarr:', error);

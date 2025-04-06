@@ -1,460 +1,255 @@
-<!-- <script setup>
+<script setup>
 import { ref, onMounted } from 'vue';
 
-// État du panier
-const cart = ref({
-  items: [],
-  count: 0,
-  total: 0
-});
-
-// Historique des commandes
 const orders = ref([]);
-
-// Formulaire de commande
-const orderForm = ref({
-  socid: '',
-  date: new Date().toISOString().split('T')[0],
-  type: 0,
-  note: ''
+const loading = ref(true);
+const apiConfig = ref({
+  url: 'http://localhost/dolibarr/htdocs/api/index.php',
+  key: '2xLG4tBVA4kw3dLrt76735jyCCh8VMfZ'
 });
 
-// Chargement initial
-onMounted(async () => {
-  loadCart();
-  await loadOrders();
-});
-
-// Charger le panier depuis le localStorage
-const loadCart = () => {
-  const savedCart = localStorage.getItem('cart');
-  if (savedCart) {
-    const parsedCart = JSON.parse(savedCart);
-    cart.value.items = parsedCart.items;
-    updateCartTotals();
+// Fonction pour récupérer les commandes
+const fetchOrders = async () => {
+  try {
+    loading.value = true;
+    const response = await fetch(`${apiConfig.value.url}/orders?sortfield=t.date_commande&sortorder=DESC`, {
+      headers: { 'DOLAPIKEY': apiConfig.value.key }
+    });
+    
+    if (!response.ok) throw new Error('Erreur lors de la récupération des commandes');
+    
+    orders.value = await response.json();
+  } catch (error) {
+    console.error('Erreur:', error);
+    alert(error.message);
+  } finally {
+    loading.value = false;
   }
-}; -->
+};
 
-// // Mettre à jour les totaux du panier
-// const updateCartTotals = () => {
-//   cart.value.count = cart.value.items.reduce((sum, item) => sum + (item.quantity || 1), 0);
-//   cart.value.total = cart.value.items.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
-// };
+// Fonction pour déterminer le statut de la commande
+const getOrderStatus = (order) => {
+  console.log(order.statut);
+  console.log(order.statut === "1");
+  if (order.statut === "3") return 'Livree';
+  if (order.statut === 3) return 'validée et facturée (paiement effectué)';
+  if (order.facture === 2) return 'validée avec facture';
+  if (order.statut === "1") return 'validée (commande effectuée)';
+  return 'en attente';
+};
 
-// // Charger les commandes depuis l'API Dolibarr
-// const loadOrders = async () => {
-//   try {
-//     const response = await fetch('https://votre-instance-dolibarr/api/index.php/orders?sortfield=t.date_commande&sortorder=DESC', {
-//       headers: {
-//         'DOLAPIKEY': 'votre_api_key_dolibarr'
-//       }
-//     });
+// Formater la date
+const formatDate = (timestamp) => {
+  if (!timestamp) return '-';
+  return new Date(timestamp * 1000).toLocaleDateString();
+};
+
+// Formater le montant
+const formatPrice = (amount) => {
+  return parseFloat(amount).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' €';
+};
+
+onMounted(() => {
+  fetchOrders();
+});
+</script>
+
+<template>
+  <div class="orders-container">
+    <h1>Mes Commandes</h1>
     
-//     if (!response.ok) throw new Error('Erreur de chargement des commandes');
+    <div v-if="loading" class="loading">
+      Chargement des commandes...
+    </div>
     
-//     const data = await response.json();
-//     orders.value = data.map(order => ({
-//       id: order.id,
-//       ref: order.ref,
-//       date: formatDate(order.date),
-//       status: getStatusText(order.status),
-//       total: order.total_ht,
-//       items: order.lines.map(line => ({
-//         product: line.label,
-//         qty: line.qty,
-//         price: line.price
-//       }))
-//     }));
-//   } catch (error) {
-//     console.error("Erreur:", error);
-//   }
-// };
-
-// // Soumission de la commande
-// const submitOrder = async () => {
-//   if (cart.value.count === 0) {
-//     alert('Votre panier est vide');
-//     return;
-//   }
-
-//   const orderData = {
-//     socid: orderForm.value.socid || 1, // Fallback à l'ID 1 si non spécifié
-//     date: Math.floor(new Date(orderForm.value.date).getTime() / 1000),
-//     type: orderForm.value.type,
-//     note: orderForm.value.note,
-//     lines: cart.value.items.map(item => ({
-//       fk_product: item.id,
-//       qty: item.quantity || 1,
-//       price: item.price
-//     }))
-//   };
-
-//   try {
-//     const response = await fetch('https://votre-instance-dolibarr/api/index.php/orders', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'DOLAPIKEY': 'votre_api_key_dolibarr'
-//       },
-//       body: JSON.stringify(orderData)
-//     });
-
-//     if (!response.ok) throw new Error(await response.text());
+    <div v-else-if="orders.length === 0" class="no-orders">
+      <p>Aucune commande trouvée.</p>
+    </div>
     
-//     const result = await response.json();
-//     alert(`Commande #${result.ref} créée avec succès!`);
-//     await loadOrders();
-//     resetCart();
-//   } catch (error) {
-//     console.error('Erreur:', error);
-//     alert(`Erreur: ${error.message}`);
-//   }
-// };
-
-// // Utilitaires
-// const formatDate = (timestamp) => {
-//   return new Date(timestamp * 1000).toLocaleDateString();
-// };
-
-// const getStatusText = (statusCode) => {
-//   const statuses = {
-//     0: 'Brouillon',
-//     1: 'Validée',
-//     2: 'Annulée',
-//     3: 'Facturée'
-//   };
-//   return statuses[statusCode] || 'Inconnu';
-// };
-
-// const resetCart = () => {
-//   cart.value = { items: [], count: 0, total: 0 };
-//   localStorage.removeItem('cart');
-// };
-// </script>
-
-// <template>
-//   <div class="app-container">
-//     <!-- Section Panier -->
-//     <section v-if="cart.count > 0" class="cart-section">
-//       <h2>Votre Panier ({{ cart.count }})</h2>
-//       <table class="cart-table">
-//         <thead>
-//           <tr>
-//             <th>Produit</th>
-//             <th>Prix unitaire</th>
-//             <th>Quantité</th>
-//             <th>Total</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           <tr v-for="item in cart.items" :key="item.id">
-//             <td>{{ item.label }}</td>
-//             <td>{{ item.price.toFixed(2) }} €</td>
-//             <td>{{ item.quantity || 1 }}</td>
-//             <td>{{ (item.price * (item.quantity || 1)).toFixed(2) }} €</td>
-//           </tr>
-//         </tbody>
-//       </table>
-      
-//       <div class="cart-total">
-//         <h3>Total: {{ cart.total.toFixed(2) }} €</h3>
-//       </div>
-
-//       <!-- Formulaire de commande -->
-//       <div class="order-form">
-//         <h3>Informations de commande</h3>
-//         <div class="form-grid">
-//           <div class="form-group">
-//             <label>ID Client (Dolibarr)</label>
-//             <input v-model.number="orderForm.socid" type="text" placeholder="ID du client">
-//           </div>
-          
-//           <div class="form-group">
-//             <label>Date de commande</label>
-//             <input v-model="orderForm.date" type="date">
-//           </div>
-          
-//           <div class="form-group">
-//             <label>Type</label>
-//             <select v-model.number="orderForm.type">
-//               <option value="0">Standard</option>
-//               <option value="1">Proforma</option>
-//               <option value="2">Spéciale</option>
-//             </select>
-//           </div>
-          
-//           <div class="form-group full-width">
-//             <label>Notes</label>
-//             <textarea v-model="orderForm.note" placeholder="Instructions spéciales..."></textarea>
-//           </div>
-//         </div>
+    <div v-else class="orders-list">
+      <div v-for="order in orders" :key="order.id" class="order-card" :class="{
+        'status-validated': order.statut === 1,
+        'status-invoiced': order.facture,
+        'status-paid': order.paye
+      }">
+        <div class="order-header">
+          <h2>Commande #{{ order.ref }}</h2>
+          <span class="order-status" :class="{
+            'status-badge-validated': order.statut === 1,
+            'status-badge-invoiced': order.facture,
+            'status-badge-paid': order.paye
+          }">
+            {{ getOrderStatus(order) }}
+          </span>
+        </div>
         
-//         <button @click="submitOrder" class="submit-btn">
-//           Valider la commande
-//         </button>
-//       </div>
-//     </section>
+        <div class="order-details">
+          <div class="detail-row">
+            <span>Date :</span>
+            <span>{{ formatDate(order.date_creation) }}</span>
+          </div>
+          <div class="detail-row">
+            <span>Total :</span>
+            <span class="order-total">{{ formatPrice(order.total_ttc) }}</span>
+          </div>
+          <div class="detail-row">
+            <span>Client :</span>
+            <span>{{ order.socid }}</span>
+          </div>
+        </div>
+        
+        <div class="order-lines">
+          <h3>Articles</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Référence</th>
+                <th>Description</th>
+                <th>Quantité</th>
+                <th>Prix unitaire</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="line in order.lines" :key="line.id">
+                <td>{{ line.product_ref || '-' }}</td>
+                <td>{{ line.description || line.desc || '-' }}</td>
+                <td>{{ line.qty }}</td>
+                <td>{{ formatPrice(line.subprice) }}</td>
+                <td>{{ formatPrice(line.total_ttc) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div v-if="order.facture" class="order-invoice">
+          <h3>Facture associée</h3>
+          <p>Référence : {{ order.facture.ref }}</p>
+          <p>Montant : {{ formatPrice(order.facture.total_ttc) }}</p>
+          <p>Statut : {{ order.facture.paye ? 'Payée' : 'En attente de paiement' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
-//     <!-- Section Historique des Commandes -->
-//     <section class="orders-section">
-//       <h2>Historique des Commandes</h2>
-      
-//       <div v-if="orders.length === 0" class="empty-orders">
-//         <p>Aucune commande trouvée</p>
-//       </div>
-      
-//       <div v-else class="orders-list">
-//         <div v-for="order in orders" :key="order.id" class="order-card">
-//           <div class="order-header">
-//             <span class="order-ref">#{{ order.ref }}</span>
-//             <span class="order-date">{{ order.date }}</span>
-//             <span :class="['order-status', order.status.toLowerCase()]">
-//               {{ order.status }}
-//             </span>
-//           </div>
-          
-//           <div class="order-details">
-//             <table>
-//               <thead>
-//                 <tr>
-//                   <th>Produit</th>
-//                   <th>Qté</th>
-//                   <th>Prix</th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 <tr v-for="(item, index) in order.items" :key="index">
-//                   <td>{{ item.product }}</td>
-//                   <td>{{ item.qty }}</td>
-//                   <td>{{ item.price.toFixed(2) }} €</td>
-//                 </tr>
-//               </tbody>
-//             </table>
-//           </div>
-          
-//           <div class="order-footer">
-//             <span class="order-total">Total: {{ order.total.toFixed(2) }} €</span>
-//             <button class="action-btn" @click="downloadInvoice(order.id)">
-//               Télécharger la facture
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   </div>
-// </template>
-
-// <style scoped>
-// .app-container {
-//   max-width: 1200px;
-//   margin: 0 auto;
-//   padding: 20px;
-//   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-// }
-
-// /* Styles pour le panier */
-// .cart-section {
-//   margin-bottom: 40px;
-//   background: #fff;
-//   padding: 20px;
-//   border-radius: 8px;
-//   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-// }
-
-// .cart-table {
-//   width: 100%;
-//   border-collapse: collapse;
-//   margin: 20px 0;
-// }
-
-// .cart-table th {
-//   text-align: left;
-//   padding: 12px;
-//   background-color: #f8f9fa;
-//   border-bottom: 2px solid #dee2e6;
-// }
-
-/* .cart-table td {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
-}
-
-/* .cart-total {
-  text-align: right;
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 4px;
-}
-
-/* Styles du formulaire */
-.order-form {
-  margin-top: 30px;
+<style scoped>
+.orders-container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
 }
 
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group.full-width {
-  grid-column: span 2;
-} */
-
-/* label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 600;
-  color: #495057;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  font-size: 14px;
-} */
-/* 
-textarea {
-  min-height: 80px;
-} */ */
-/* 
-.submit-btn {
-  background-color: #28a745;
-  color: white;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  margin-top: 10px;
-  transition: background-color 0.3s;
-}
-
-.submit-btn:hover {
-  background-color: #218838;
-}
-
-/* Styles pour l'historique des commandes */
-.orders-section {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+.loading, .no-orders {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2em;
+  color: #666;
 }
 
 .orders-list {
-  margin-top: 20px;
+  display: grid;
+  gap: 20px;
 }
 
 .order-card {
-  border: 1px solid #dee2e6;
-  border-radius: 6px;
-  margin-bottom: 20px;
-  overflow: hidden;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .order-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 15px;
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #dee2e6;
-}
-
-.order-ref {
-  font-weight: 600;
-  color: #212529;
-}
-
-.order-date {
-  color: #6c757d;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .order-status {
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-weight: bold;
 }
 
-.order-status.validée {
-  background-color: #d4edda;
-  color: #155724;
-} */
-/* 
-.order-status.annulée {
-  background-color: #f8d7da;
-  color: #721c24;
+.status-badge-validated {
+  background-color: #e3f2fd;
+  color: #1976d2;
 }
 
-.order-status.brouillon {
-  background-color: #fff3cd;
-  color: #856404;
+.status-badge-invoiced {
+  background-color: #e8f5e9;
+  color: #388e3c;
+}
+
+.status-badge-paid {
+  background-color: #f1f8e9;
+  color: #689f38;
 }
 
 .order-details {
-  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-.order-details table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.order-details th, .order-details td {
-  padding: 8px 12px;
-  text-align: left;
-  border-bottom: 1px solid #dee2e6;
-}
-
-.order-details th {
-  background-color: #f8f9fa;
-}
-
-.order-footer {
+.detail-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 12px 15px;
-  background-color: #f8f9fa;
-  border-top: 1px solid #dee2e6;
+}
+
+.detail-row span:first-child {
+  font-weight: bold;
+  color: #666;
 }
 
 .order-total {
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: bold;
+  color: #1976d2;
 }
 
-.action-btn {
-  background-color: #007bff;
-  color: white;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
+.order-lines {
+  margin-top: 20px;
 }
 
-.action-btn:hover {
-  background-color: #0069d9;
+.order-lines table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
 }
 
-.empty-orders {
-  text-align: center;
-  padding: 40px;
-  color: #6c757d;
+.order-lines th, .order-lines td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
 }
-</style> */
+
+.order-lines th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+.order-invoice {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px dashed #e0e0e0;
+}
+
+/* Styles pour les différents statuts */
+.status-validated {
+  border-left: 4px solid #1976d2;
+}
+
+.status-invoiced {
+  border-left: 4px solid #388e3c;
+}
+
+.status-paid {
+  border-left: 4px solid #689f38;
+}
+</style>
