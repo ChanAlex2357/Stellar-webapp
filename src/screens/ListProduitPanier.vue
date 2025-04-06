@@ -74,7 +74,7 @@ const submitOrder = async () => {
 
   try {
     // Envoi à l'API Dolibarr
-    const response = await fetch('https://votre-instance-dolibarr/api/index.php/orders', {
+    const response = await fetch('http://localhost/dolibarr/htdocs/api/index.php/orders', {
       method: 'POST',
       headers: {
       'DOLAPIKEY': '2xLG4tBVA4kw3dLrt76735jyCCh8VMfZ',
