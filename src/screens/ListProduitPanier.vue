@@ -69,7 +69,7 @@ const submitOrder = async () => {
     socid: 1, // ID du client dans Dolibarr
     date: dateTimestamp,
     type: orderForm.value.type,
-    lines: lines
+    // lines: lines
   };
 
   try {
@@ -84,10 +84,34 @@ const submitOrder = async () => {
       body: JSON.stringify(dolibarrOrder)
     });
 
-    if (!response.ok) throw new Error('Erreur API');
+    if (response.status !== 200) throw new Error('Erreur API');
 
     const data = await response.json();
     console.log('Commande créée dans Dolibarr:', data);
+
+    for (const line of lines) {
+      const line_response = await fetch(`http://localhost/dolibarr/htdocs/api/index.php/orders/${data}/lines`, {
+        method: 'POST',
+        headers: {
+          'DOLAPIKEY': '2xLG4tBVA4kw3dLrt76735jyCCh8VMfZ',
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(line)
+      });
+      if (line_response.status !== 200) throw new Error('Erreur API');
+    };
+
+    const validation_response = await fetch(`http://localhost/dolibarr/htdocs/api/index.php/orders/${data}/validate`, {
+      method: 'POST',
+      headers: {
+        'DOLAPIKEY': '2xLG4tBVA4kw3dLrt76735jyCCh8VMfZ',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    if (validation_response.status !== 200) throw new Error('Erreur API');
     alert('Commande validée et envoyée à Dolibarr avec succès !');
     
     // Optionnel : vider le panier après envoi
