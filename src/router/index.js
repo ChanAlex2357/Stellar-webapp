@@ -15,12 +15,18 @@ const routes = [
     component: Boutique
   },
 
-    { 
+  { 
     path: '/panier',
     name: 'panier',
     component: ListProduitPanier,
-    }
+  },
 
+    
+    // { 
+    //   path: '/commande',
+    //   name: 'commande',
+    //   component:DetailCommande,
+    //   }
 //     meta: {
 //       title: 'Nos Produits - Stellar Bikes'
 //     }
