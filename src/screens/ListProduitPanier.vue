@@ -102,36 +102,29 @@ const submitOrder = async () => {
 </script>
 
 <template>
-  <div class="app-container">
-    <h1>Votre Panier ({{ cart.count }})</h1>
-    
-    <div v-if="cart.count === 0">
-      <p>Votre panier est vide.</p>
-      <router-link to="/">Continuer vos achats</router-link>
-    </div>
-    
-    <div v-else>
-      <table class="cart-table">
-        <thead>
-          <tr>
-            <th>Réf.</th>
-            <th>Prix unitaire</th>
-            <th>Quantité</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in cart.items" :key="item.id">
-            <td>{{ item.label }}</td>
-            <td>{{ item.price }} €</td>
-            <td>{{ item.quantity || 1 }}</td>
-            <td>{{ (item.price * (item.quantity || 1)).toFixed(2) }} €</td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="container" id="list-produit">
+    <div id="list-produit-container">
+      <div id="list-produit-header" class="">
+        <h1 class="text-title">VOTRE PANIER</h1>
+        <h1 class="text-title">({{ cart.count }})</h1>
+      </div>
       
-      <div class="cart-summary">
-        <h3>Total du panier: {{ cart.total.toFixed(2) }} €</h3>
+      <div v-if="cart.count === 0" id="empty-cart" class="grow gap">
+        <p>Votre panier est vide.</p>
+        <router-link to="/" style="color: var(--secondary-color);">Continuer vos achats</router-link>
+      </div>
+      
+      <div v-else id="cart-items" class="grow gap">
+        <div v-for="item in cart.items" :key="item.id" class="cart-item">
+          <h3 class="text-title">{{ item.label }}</h3>
+          <p>Prix unitaire: {{ item.price }} €</p>
+          <p>Quantité: {{ item.quantity || 1 }}</p>
+          <p style="color: var(--secondary-color);">Total: {{ (item.price * (item.quantity || 1)).toFixed(2) }} €</p>
+        </div>
+        
+        <div class="cart-summary">
+          <h3 class="text-title">TOTAL DU PANIER: {{ cart.total.toFixed(2) }} €</h3>
+        </div>
       </div>
 
       <!-- Formulaire adapté pour Dolibarr -->
@@ -165,106 +158,59 @@ const submitOrder = async () => {
   </div>
 </template>
 
-<style scoped>
-/* Styles existants conservés */
-.app-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
+<style>
+    #list-produit {
+        min-height: 800px;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        background-size: cover;
+        background-repeat: no-repeat;
+        color: var(--white-color);
+        background-image: radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1) ), url("./src\\assets\\image\\accueil.jpg");
+    }
+    
+    .grow {
+        flex-grow: 1;
+    }
 
-.cart-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-}
+    .gap {
+        gap: 20px;
+    }
 
-.cart-table th, 
-.cart-table td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid #e0e0e0;
-}
+    #list-produit-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        min-height: 300px;
+        gap: 20px;
+    }
 
-.cart-table th {
-  background-color: #f5f5f5;
-  font-weight: bold;
-}
-
-.cart-table tbody tr:hover {
-  background-color: #f9f9f9;
-}
-
-.cart-summary {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #f5f5f5;
-  border-radius: 4px;
-  text-align: right;
-}
-
-.cart-summary h3 {
-  margin: 0;
-  font-size: 1.2em;
-}
-
-a {
-  color: #42b983;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Styles pour le formulaire */
-.order-form {
-  margin-top: 30px;
-  padding: 20px;
-  background-color: #f8f8f8;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
-}
-
-.order-form h2 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 1.3em;
-  color: #333;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.form-group input,
-.form-group select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.submit-btn {
-  background-color: #42b983;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1em;
-  margin-top: 10px;
-}
-
-.submit-btn:hover {
-  background-color: #369f6b;
-}
+    #list-produit-container {
+        margin: 2rem 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    
+    #cart-items, #empty-cart {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .cart-item {
+        padding: 1rem;
+        border-bottom: 1px solid var(--secondary-color);
+    }
+    
+    .cart-summary {
+        margin-top: 3rem;
+        padding: 1rem;
+        border-top: 2px solid var(--secondary-color);
+    }
+    
+    .text-title {
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+    }
 </style>
