@@ -9,11 +9,9 @@ import Accueil from '@/screens/ListProduitPanier.vue'
           <img src="@/assets/image/logo.png" alt="Logo" id="logo">
         </div>
           <nav id="menu">
-            <a href="">Accueil</a>
-            <a href="">Caractéristiques</a>
-            <a href="">Gallery</a>
-            <a href="">Contact</a>
-            <a href="">Produits</a>
+            <p>NOS PRODUIT</p>
+            <a href=""> <Ri:a>Recherche un  produit</Ri:a></a>
+         
         </nav>
       </div>
     </header>
@@ -31,7 +29,7 @@ header {
 }
 
 #orange-bar {
-  background-color: var(--secondary-color);
+  background-color:#0d0d58;
   height: 50px;
 }
 </style>
