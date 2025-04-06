@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LandingPage from '@/screens/LandingPage.vue'
 import Boutique from '@/screens/Boutique.vue'
 import ListProduitPanier from '@/screens/ListProduitPanier.vue'
+import DetailCommande from '@/screens/DetailCommande.vue'
 const routes = [
   {
     path: '/',
@@ -20,13 +21,11 @@ const routes = [
     name: 'panier',
     component: ListProduitPanier,
   },
-
-    
-    // { 
-    //   path: '/commande',
-    //   name: 'commande',
-    //   component:DetailCommande,
-    //   }
+  { 
+    path: '/commande',
+    name: 'commande',
+    component:DetailCommande,
+    }
 //     meta: {
 //       title: 'Nos Produits - Stellar Bikes'
 //     }
