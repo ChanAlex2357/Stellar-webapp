@@ -1,9 +1,12 @@
 <script setup>
+import NavListProduit from './screens/NavListProduit.vue';
+
 
 </script>
 
 <template>
   <main>
+
       <!-- <Accueil></Accueil>
       <div id="orange-bar"></div>
       <Caracteristique></Caracteristique>
