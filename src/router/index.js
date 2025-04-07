@@ -7,6 +7,7 @@ import DetailCommande from '@/screens/DetailCommande.vue'
 import NavListProduit from '@/screens/NavListProduit.vue'
 
 import CustomerLogin from '@/screens/LoginPage.vue'
+import Dashboard from '@/screens/Dashboard.vue'
 const routes = [
   {
     path: '/',
@@ -37,6 +38,10 @@ const routes = [
     path:'/login',
     name:'login',
     component:CustomerLogin
+  },{
+    path:'/dashboard',
+    name:'dashboard',
+    component:Dashboard
   }
 ]
 

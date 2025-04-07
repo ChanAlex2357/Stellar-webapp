@@ -1,5 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import BicycleSpinner from '@/components/BicycleSpinner.vue';
+import NavListProduit from './NavListProduit.vue';
 
 const orders = ref([]);
 const loading = ref(true);
@@ -7,6 +9,7 @@ const apiConfig = ref({
   url: 'http://localhost/dolibarr/htdocs/api/index.php',
   key: '2xLG4tBVA4kw3dLrt76735jyCCh8VMfZ'
 });
+
 
 // Fonction pour récupérer les commandes
 const fetchOrders = async () => {
@@ -21,9 +24,8 @@ const fetchOrders = async () => {
     orders.value = await response.json();
   } catch (error) {
     console.error('Erreur:', error);
-    alert(error.message);
   } finally {
-    loading.value = false;
+    loading.value = true;
   }
 };
 
@@ -55,11 +57,12 @@ onMounted(() => {
 </script>
 
 <template>
+  <NavListProduit />
   <div class="orders-container">
     <h1>Mes Commandes</h1>
     
     <div v-if="loading" class="loading">
-      Chargement des commandes...
+      <BicycleSpinner />
     </div>
     
     <div v-else-if="orders.length === 0" class="no-orders">

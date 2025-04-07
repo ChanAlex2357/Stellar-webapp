@@ -109,9 +109,17 @@ p {
   text-transform: uppercase;
 }
 
+.loading {
+  height: 55vh;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
 #menu a:hover {
   color: var(--secondary-color);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .text-title {

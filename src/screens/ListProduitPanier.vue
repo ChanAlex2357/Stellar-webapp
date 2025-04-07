@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import RoundSpinner from '@/components/RoundSpinner.vue';
+import NavListProduit from './NavListProduit.vue';
 
 const cart = ref({
   items: [],
@@ -132,6 +133,7 @@ const submitOrder = async () => {
 </script>
 
 <template>
+  <NavListProduit />
   <div class="app-container">
     <h1>Votre Panier ({{ cart.count }})</h1>
     

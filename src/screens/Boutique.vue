@@ -122,7 +122,7 @@ axios.get('http://localhost/dolibarr/htdocs/api/index.php/products?sortfield=t.r
       </div>
     </div>
     
-    <div v-if="loading" class="product-list-container-loading">
+    <div v-if="loading" class="loading">
       <BycicleSpinner />
     </div>
 
@@ -191,12 +191,7 @@ h1 {
   justify-content: center;;
 }
 
-.product-list-container-loading {
-  height: 55vh;
-  display: flex;
-  justify-content: center;
-  align-self: center;
-}
+
 .product-list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
