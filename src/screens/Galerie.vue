@@ -4,7 +4,7 @@ import PhotoGallerie from '../components/PhotoGallerie.vue'
 </script>
 
 <template>
-    <div class="gallery-container">
+    <div class="gallery-container" id="gallery-section" tabindex="-1">
         <div class="container">
             <div class="title-header">
                 <h1>GALLERIE</h1>

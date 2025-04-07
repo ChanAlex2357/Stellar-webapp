@@ -14,11 +14,11 @@ import Footer from '@/screens/Footer.vue'
           <img src="@/assets/image/logo.png" alt="Logo" id="logo">
         </div>
           <nav id="menu">
-            <a href="">Accueil</a>
-            <a href="">Caractéristiques</a>
-            <a href="">Gallery</a>
-            <a href="">Contact</a>
-            <a href="">Produits</a>
+            <a href="#accueil-section">Accueil</a>
+            <a href="#caracteristique-section">Caractéristiques</a>
+            <a href="#gallery-section">Gallery</a>
+            <a href="#contact-section">Contact</a>
+            <a href="#product-section">Produits</a>
         </nav>
       </div>
     </header>

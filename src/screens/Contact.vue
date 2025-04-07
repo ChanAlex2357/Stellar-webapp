@@ -5,7 +5,7 @@ import ContactForm from '@/components/ContactForm.vue'
 </script>
 
 <template>
-  <div class="contact-page">
+  <div class="contact-page" id="contact-section" tabindex="-1">
     <!-- Partie Gauche - Texte et icônes -->
     <div class="left-section">
       <div>

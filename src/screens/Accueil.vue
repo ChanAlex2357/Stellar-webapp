@@ -3,7 +3,7 @@ import TryButton from  '../components/TryButton.vue'
 </script>
 
 <template>
-    <div class="container" id="accueil">
+    <div class="container" id="accueil-section" tabindex="-1">
         <div id="accueil-text-container">
             <div id="accueil-logo" class="">
                 <h1 class="text-title">STELLAR</h1>
@@ -24,7 +24,7 @@ import TryButton from  '../components/TryButton.vue'
 </template>
 
 <style>
-    #accueil {
+    #accueil-section {
         min-height: 800px;
         display: grid;
         grid-template-columns: 1fr 2fr;

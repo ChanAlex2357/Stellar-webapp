@@ -4,6 +4,7 @@ import LandingPage from '@/screens/LandingPage.vue'
 import Boutique from '@/screens/Boutique.vue'
 import ListProduitPanier from '@/screens/ListProduitPanier.vue'
 import DetailCommande from '@/screens/DetailCommande.vue'
+import NavListProduit from '@/screens/NavListProduit.vue'
 const routes = [
   {
     path: '/',
@@ -25,7 +26,19 @@ const routes = [
     path: '/commande',
     name: 'commande',
     component:DetailCommande,
-    }
+    },
+
+     {
+      path: '/navbar',
+      name: 'navbar',
+      component:NavListProduit,
+     }
+  
+    
+
+
+
+
 //     meta: {
 //       title: 'Nos Produits - Stellar Bikes'
 //     }

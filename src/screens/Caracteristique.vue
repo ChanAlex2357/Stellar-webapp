@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="container" id="caracteristique">
+    <div class="container" id="caracteristique-section" tabindex="-1">
         <div class="product-container">
             <div class="product-image">
                 <img src="/src/assets/image/cool-bicycle-outdoors.jpg" alt="cool-bicycle-outdoors.jpg">
@@ -19,7 +19,7 @@
 
 <style scoped>
 /* Styles existants conservés */
-#caracteristique {
+#caracteristique-section {
     background-color: var(--dark-color);
     color: var(--white-color);
 }

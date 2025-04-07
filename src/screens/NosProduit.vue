@@ -5,7 +5,7 @@
 <template>
 <div class="container">
 
-    <div class="product-container">
+    <div class="product-container" id="product-section" tabindex="-1">
         <!-- Partie texte -->
     <div class="product-info">
       <h1 class="product-title">STELLAR-A</h1>

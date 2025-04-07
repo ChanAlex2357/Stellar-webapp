@@ -1,35 +1,40 @@
 <script setup>
-import Accueil from '@/screens/ListProduitPanier.vue'
+
+import {useRouter} from 'vue-router';
+
+const routes = useRouter();
+
+function goToHome(){
+  routes.push('/');
+}
+
+function goToCart() {
+  routes.push({ name: 'panier' });
+}
 
 </script>
 <template>
-    <header id="header">
+    <header id="magasin-header">
       <div class="container">
         <div id="logo-container">
           <img src="@/assets/image/logo.png" alt="Logo" id="logo">
         </div>
           <nav id="menu">
-            <p>NOS PRODUIT</p>
-            <a href=""> <Ri:a>Recherche un  produit</Ri:a></a>
-         
-        </nav>
+            <a @click="goToHome" >Accueil</a>
+            <a href="">Magasin</a>
+            <a @click="goToCart">Mon panier</a>
+            <a href="">Mes commandes</a>
+          </nav>
       </div>
     </header>
-        <Accueil></Accueil>
-      <div id="orange-bar"></div>
-      <Caracteristique></Caracteristique>
-      <Gallerie></Gallerie>
-      <Contact></Contact>
-      <NosProduit></NosProduit>
-    <Footer></Footer>
 </template>
+
 <style scoped>
-header {
+#magasin-header {
   line-height: 1.5;
+  background-color: #03224c;
+  width: 100%;
+  height: 100px;
 }
 
-#orange-bar {
-  background-color:#0d0d58;
-  height: 50px;
-}
 </style>
