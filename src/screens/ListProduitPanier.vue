@@ -18,6 +18,9 @@ const orderForm = ref({
 });
 
 onMounted(() => {
+  if(localStorage.getItem('DOLAPIKEY') === null){
+    router.push('/login');
+  }
   const savedCart = localStorage.getItem('cart');
   if (savedCart) {
     const parsedCart = JSON.parse(savedCart);
