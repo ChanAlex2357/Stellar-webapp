@@ -5,6 +5,8 @@ import Boutique from '@/screens/Boutique.vue'
 import ListProduitPanier from '@/screens/ListProduitPanier.vue'
 import DetailCommande from '@/screens/DetailCommande.vue'
 import NavListProduit from '@/screens/NavListProduit.vue'
+
+import CustomerLogin from '@/screens/CustomerLogin.vue'
 const routes = [
   {
     path: '/',
@@ -26,54 +28,16 @@ const routes = [
     path: '/commande',
     name: 'commande',
     component:DetailCommande,
-    },
-
-     {
-      path: '/navbar',
-      name: 'navbar',
-      component:NavListProduit,
-     }
-  
-    
-
-
-
-
-//     meta: {
-//       title: 'Nos Produits - Stellar Bikes'
-//     }
-//   },
-//   {
-//     path: '/contact',
-//     name: 'contact',
-//     component: ContactView,
-//     meta: {
-//       title: 'Contact - Stellar Bikes'
-//     }
-//   },
-//   {
-//     path: '/panier',
-//     name: 'panier',
-//     component: PanierView,
-//     meta: {
-//       title: 'Panier - Stellar Bikes'
-//     }
-//   },
-//   {
-//     path: '/dashboard',
-//     name: 'dashboard',
-//     component: DashboardView,
-//     meta: {
-//       title: 'Dashboard - Stellar Bikes',
-//       requiresAuth: true
-//     }
-//   },
-  // Route pour la page 404
-//   {
-//     path: '/:pathMatch(.*)*',
-//     name: 'not-found',
-//     component: () => import('@/screens/NotFoundView.vue'),
-//   }
+  },
+  {
+    path: '/navbar',
+    name: 'navbar',
+    component:NavListProduit,
+  },{
+    path:'/login',
+    name:'login',
+    component:CustomerLogin
+  }
 ]
 
 const router = createRouter({
