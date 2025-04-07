@@ -1,5 +1,6 @@
 <script setup>
 
+import Logo from '@/components/Logo.vue';
 import {useRouter} from 'vue-router';
 
 const routes = useRouter();
@@ -16,9 +17,7 @@ function goToCart() {
 <template>
     <header id="magasin-header">
       <div class="container">
-        <div id="logo-container">
-          <img src="@/assets/image/logo.png" alt="Logo" id="logo">
-        </div>
+          <Logo></Logo>
           <nav id="menu">
             <a @click="goToHome" >Accueil</a>
             <a href="">Magasin</a>

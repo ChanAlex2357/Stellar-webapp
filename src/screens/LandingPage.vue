@@ -5,14 +5,13 @@ import Gallerie from '@/screens/Galerie.vue'
 import Contact from '@/screens/Contact.vue'
 import NosProduit from '@/screens/NosProduit.vue'
 import Footer from '@/screens/Footer.vue'
+import Logo from '@/components/Logo.vue'
 
 </script>
 <template>
     <header id="header">
       <div class="container">
-        <div id="logo-container">
-          <img src="@/assets/image/logo.png" alt="Logo" id="logo">
-        </div>
+        <Logo></Logo>
           <nav id="menu">
             <a href="#accueil-section">Accueil</a>
             <a href="#caracteristique-section">Caractéristiques</a>
