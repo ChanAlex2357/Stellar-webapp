@@ -6,7 +6,7 @@ import ListProduitPanier from '@/screens/ListProduitPanier.vue'
 import DetailCommande from '@/screens/DetailCommande.vue'
 import NavListProduit from '@/screens/NavListProduit.vue'
 
-import CustomerLogin from '@/screens/CustomerLogin.vue'
+import CustomerLogin from '@/screens/LoginPage.vue'
 const routes = [
   {
     path: '/',

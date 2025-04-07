@@ -14,15 +14,32 @@ const loginErrorMessage = ref('')
 const errorState = ref(false)
 const loginState = ref(false)
 
-const email = ref('')
+const username = ref('')
 const password = ref('')
-
+const checkLogin = () => {
+    if(username.value === 'admin' && password.value === 'admin') {
+        localStorage.setItem('DOLAPIKEY', '2xLG4tBVA4kw3dLrt76735jyCCh8VMfZ')
+        loginState.value = true
+    }
+    else {
+        loginState.value = false
+    }
+   
+}
 const loginSubmit = () => {
     try {
         // Verification du login
         
         // Redirection en cas de validation
-        routes.push(props.source);
+        checkLogin()
+        if(loginState.value) {
+            routes.push(props.source)
+        }
+        // Sinon on affiche le message d'erreur
+        else {
+            errorState.value = true
+            loginErrorMessage.value = "Email ou mot de passe incorrect"
+        }
     } catch (error) {
         // Afficher les messages d'erreurs
 
@@ -44,8 +61,8 @@ const loginSubmit = () => {
                 <div class="card-body">
                     <form>
                         <div class="form-group">
-                            <label for="login">Email</label>
-                            <input v-model="email" type="email" id="login" placeholder="jean@gmail.com">
+                            <label for="login">Nom d'utilisateur</label>
+                            <input v-model="username" type="email" id="login" placeholder="jean@gmail.com">
                         </div>
                     <div class="form-group">
                         <label for="password">Mot de passe</label>
@@ -100,7 +117,6 @@ const loginSubmit = () => {
     .form-group label {
         display: block;
         margin-bottom: 0.5rem;
-        font-size: 1.2rem;
     }
     .form-group input {
         width: 100%;
