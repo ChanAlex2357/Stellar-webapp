@@ -126,7 +126,8 @@ axios.get('http://localhost/dolibarr/htdocs/api/index.php/products?sortfield=t.r
       <div class="product-list">
 
         <div v-for="product in products" :key="product.id" class="product-card">
-          <img :src="product.url" :alt="product.name">
+          <img v-if="product.url" :src="product.url" :alt="product.name">
+          <img v-else src="@/assets/image/bike-placeholder.png" alt="Image non disponible">
           <h3>{{ product.label }}</h3>
           <p>{{ product.price }}</p>
           <p>{{ product.ref }}</p>
