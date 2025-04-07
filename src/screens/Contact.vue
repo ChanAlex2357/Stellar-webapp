@@ -18,9 +18,9 @@ import ContactForm from '@/components/ContactForm.vue'
         <h2>SUIVEZ-NOUS</h2>
         <div class="social-icons">
           <!-- Remplacez par vos vrais composants d'icônes -->
-          <IconDisplay name="facebook"></IconDisplay>
-          <IconDisplay name="instagram"></IconDisplay>
-          <IconDisplay name="twitter"></IconDisplay>
+          <IconDisplay name="facebook" size="75px"></IconDisplay>
+          <IconDisplay name="instagram" size="75px"></IconDisplay>
+          <IconDisplay name="twitter" size="75px"></IconDisplay>
         </div>
       </div>
     </div>

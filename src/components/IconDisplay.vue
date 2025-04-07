@@ -8,7 +8,7 @@ const props = defineProps({
   },
   size: {
     type: String,
-    default: '75px',
+    default: '40px',
     validator: (value) => /^\d+(px|rem|em|%)$/.test(value)
   },
   color: {
