@@ -1,4 +1,5 @@
 <script setup>
+import RoundSpinner from '@/components/RoundSpinner.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -19,17 +20,10 @@ const credentials = ref({
     password: ''
 });
 
-const checkLogin = () => {
-    if(credentials.value.username === 'admin' && credentials.value.password === 'admin') {
-        localStorage.setItem('DOLAPIKEY', '2xLG4tBVA4kw3dLrt76735jyCCh8VMfZ');
-        loginState.value = true;
-    } else {
-        loginState.value = false;
-    }
-};
 
 const loginSubmit = async () => {
     try {
+        loginState.value = true;
         errorState.value = false;
         loginErrorMessage.value = '';
         
@@ -62,7 +56,7 @@ const loginSubmit = async () => {
             
             // Redirection après connexion réussie
             localStorage.setItem('user_id', JSON.stringify(data.success.entity));
-            loginState.value = true;
+            
             localStorage.setItem('cart', JSON.stringify({ items: [], count: 0, total: 0 }));
             router.push(props.source);
         } else {
@@ -72,6 +66,9 @@ const loginSubmit = async () => {
         errorState.value = true;
         loginErrorMessage.value = error.message;
         console.error("Erreur de connexion:", error);
+    }
+    finally {
+        loginState.value = false;
     }
 };
 </script>
@@ -89,17 +86,16 @@ const loginSubmit = async () => {
                     <form @submit.prevent="loginSubmit">
                         <div class="form-group">
                             <label for="login">Nom d'utilisateur</label>
-                            <input v-model="credentials.username" type="text" id="login" placeholder="jean@gmail.com">
+                            <input v-model="credentials.username" type="text" id="login" placeholder="jean@gmail.com" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Mot de passe</label>
-                            <input v-model="credentials.password" type="password" id="password" placeholder="********">
+                            <input v-model="credentials.password" type="password" id="password" placeholder="********" required>
                         </div>
                         
                         <div class="form-submit-container">
-                            <button type="submit" id="submit-btn">
-                                Se connecter
-                            </button>
+                            <button v-if="loginState" class="submit-btn"> <RoundSpinner /> </button>
+                            <button v-else  type="submit" id="submit-btn">Se connecter</button>
                         </div>
                     </form>
                 </div>

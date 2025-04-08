@@ -15,17 +15,6 @@ const router = useRouter(); // Correction ici : useRouter() pour la navigation
 
 const cart = ref([]);
 
-onMounted(() => {
-  if(localStorage.getItem('DOLAPIKEY') === null){
-    router.push('/login');
-  }
-
-  const savedCart = localStorage.getItem('cart');
-  if (savedCart) {
-    const parsedCart = JSON.parse(savedCart);
-    cart.value = parsedCart.items;
-  }
-});
 
 // Liste des catégories
 const categories = ref([
@@ -45,11 +34,26 @@ function addToCart(product) {
   }
   localStorage.setItem('cart', JSON.stringify({ items: cart.value }));
 }
+function fetchCategory(){
+  axios.get('http://localhost/dolibarr/htdocs/api/index.php/categories?sortfield=t.rowid&sortorder=ASC&limit=100', {
+    headers: {
+      'DOLAPIKEY': '2xLG4tBVA4kw3dLrt76735jyCCh8VMfZ',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+   }
+  )
+  .then(response => {
+    console.log(response.data);
+    categories.value = response.data;
+  })
+  .catch(error => {
+    console.error('Error fetching categories:', error);
+  });
+}
 
-// Fonction pour aller au panier
-
-
-axios.get('http://localhost/dolibarr/htdocs/api/index.php/products?sortfield=t.ref&sortorder=ASC&limit=100', {
+function fetchProducts(){
+  axios.get('http://localhost/dolibarr/htdocs/api/index.php/products?sortfield=t.ref&sortorder=ASC&limit=100', {
   headers: {
     'DOLAPIKEY': '2xLG4tBVA4kw3dLrt76735jyCCh8VMfZ',
     'Accept': 'application/json',
@@ -89,6 +93,25 @@ axios.get('http://localhost/dolibarr/htdocs/api/index.php/products?sortfield=t.r
 .catch(error => {
   console.error('Error fetching products:', error);
 });
+}
+
+
+onMounted(() => {
+  if(localStorage.getItem('DOLAPIKEY') === null){
+    router.push('/login');
+  }
+
+  const savedCart = localStorage.getItem('cart');
+  if (savedCart) {
+    const parsedCart = JSON.parse(savedCart);
+    cart.value = parsedCart.items;
+  }
+
+  fetchProducts();
+  fetchCategory();
+
+});
+
 </script>
 
 <template>
@@ -99,6 +122,14 @@ axios.get('http://localhost/dolibarr/htdocs/api/index.php/products?sortfield=t.r
     <div class="filters-container">
       <div class="shop-title">
         <h1>NOS PRODUITS</h1>
+      </div>
+      <div class="category-filter">
+        <select v-model="selectedCategory" class="category-select">
+          <option value="">Toutes les catégories</option>
+          <option v-for="category in categories" :key="category.id" :value="category.id">
+            {{ category.label }}
+          </option>
+        </select>
       </div>
       <div class="search-container">
         <input 
@@ -112,14 +143,6 @@ axios.get('http://localhost/dolibarr/htdocs/api/index.php/products?sortfield=t.r
         </button>
       </div>
       
-      <div class="category-filter">
-        <select v-model="selectedCategory" class="category-select">
-          <option value="">Toutes les catégories</option>
-          <option v-for="category in categories" :key="category.id" :value="category.id">
-            {{ category.name }}
-          </option>
-        </select>
-      </div>
     </div>
     
     <div v-if="loading" class="loading">

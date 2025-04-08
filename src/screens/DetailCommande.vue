@@ -12,20 +12,42 @@ const apiConfig = ref({
 
 
 // Fonction pour récupérer les commandes
-const fetchOrders = async () => {
+const fetchOrders = async (userId) => {
   try {
     loading.value = true;
-    const response = await fetch(`${apiConfig.value.url}/orders?sortfield=t.date_commande&sortorder=DESC`, {
-      headers: { 'DOLAPIKEY': apiConfig.value.key }
-    });
     
-    if (!response.ok) throw new Error('Erreur lors de la récupération des commandes');
+    // Vérification que l'userId est bien défini
+    if (!userId) throw new Error('ID utilisateur non spécifié');
+
+    let filters = (`t.fk_soc:=:'${userId}'`);
+    filters = filters.replace('"', '');    // supprime les guillemets
+    filters = filters.replace('"', '');    // supprime les guillemets
+    const response = await fetch(
+      `${apiConfig.value.url}/orders?sortfield=t.date_commande&sortorder=DESC&sqlfilters=(${filters})`, 
+      {
+        headers: { 
+          'DOLAPIKEY': apiConfig.value.key,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
     
-    orders.value = await response.json();
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    if (!data || data.error) {
+      throw new Error(data.error?.message || 'Aucune donnée reçue');
+    }
+    
+    orders.value = data;
+    
   } catch (error) {
     console.error('Erreur:', error);
   } finally {
-    loading.value = true;
+    loading.value = false;
   }
 };
 
@@ -52,7 +74,7 @@ const formatPrice = (amount) => {
 };
 
 onMounted(() => {
-  fetchOrders();
+  fetchOrders(localStorage.getItem('user_id'));
 });
 </script>
 

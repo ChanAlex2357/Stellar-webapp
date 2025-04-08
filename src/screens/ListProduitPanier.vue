@@ -12,7 +12,7 @@ const cart = ref({
 const orderLoading = ref(false);
 
 const orderForm = ref({
-  socid: '', // Correspond au client dans Dolibarr
+  socid: localStorage.getItem('user_id'), // Correspond au client dans Dolibarr
   date: new Date().toISOString().split('T')[0], // Date du jour par défaut
   type: 0 // Type de commande (0 par défaut)
 });
@@ -75,7 +75,7 @@ const submitOrder = async () => {
 
   // Créer l'objet commande au format Dolibarr
   const dolibarrOrder = {
-    socid: 1, // ID du client dans Dolibarr
+    socid: orderForm.value.socid, // ID du client dans Dolibarr
     date: dateTimestamp,
     type: orderForm.value.type,
     // lines: lines
@@ -160,28 +160,6 @@ const submitOrder = async () => {
       <!-- Formulaire adapté pour Dolibarr -->
       <div class="order-form">
         <h2>Validation de commande</h2>
-        <div class="form-group">
-          <label for="client-id">ID Client (socid) :</label>
-          <input 
-            id="client-id" 
-            v-model.number="orderForm.socid" 
-            type="text" 
-            required
-            placeholder="ID du client dans Dolibarr"
-          >
-        </div>
-        <div class="form-group">
-          <label for="order-date">Date :</label>
-          <input id="order-date" v-model="orderForm.date" type="date" required>
-        </div>
-        <div class="form-group">
-          <label for="order-type">Type de commande :</label>
-          <select id="order-type" v-model.number="orderForm.type">
-            <option value="0">Standard</option>
-            <option value="1">Type 1</option>
-            <option value="2">Type 2</option>
-          </select>
-        </div>
         <button v-if="orderLoading" class="submit-btn"> <RoundSpinner /> </button>
         <button v-else  @click="submitOrder" class="submit-btn">Valider la commande</button>
       </div>
